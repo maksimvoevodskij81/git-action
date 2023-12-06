@@ -35,7 +35,7 @@ jobs:
 
       - name: Generate EF Core Migration Script       
         run: |
-          dotnet ef migrations script --idempotent --no-build --configuration Release --output ${{env.DOTNET_ROOT}}/sql/sql-script.sql --context PieAppDbContext --project ${{github.workspace}}/PieApp/GitAction.csproj
+          dotnet ef migrations script --idempotent --no-build --configuration Release --output ${{env.DOTNET_ROOT}}/sql/sql-script.sql --context PieAppDbContext --project ${{github.workspace}}/PieApp/PieApp.csproj
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -60,9 +60,9 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'demo-app-with-db'
+          app-name: 'pieapp'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_860168453798489C864E12AA45095832 }}         
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D25E08074117411BAC175BA05340ADE6 }}
           package: .
 
       - name: Azure SQL Deploy
