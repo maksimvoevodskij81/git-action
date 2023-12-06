@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PieAppTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+13abc341a94a5f17866987de9b854c17b2bfd740")]
 [assembly: System.Reflection.AssemblyProductAttribute("PieAppTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PieAppTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

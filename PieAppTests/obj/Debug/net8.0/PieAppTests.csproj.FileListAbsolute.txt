@@ -682,3 +682,4 @@ C:\Users\maksi\Repos\git-actions\PieAppTests\bin\Debug\net8.0\PieApp.pdb
 C:\Users\maksi\Repos\git-actions\PieAppTests\obj\Debug\net8.0\PieAppTests.csproj.CopyComplete
 C:\Users\maksi\Repos\git-actions\PieAppTests\obj\Debug\net8.0\PieAppTests.genruntimeconfig.cache
 C:\Users\maksi\Repos\git-actions\PieAppTests\obj\Debug\net8.0\ref\PieAppTests.dll
+C:\Users\maksi\Repos\git-actions\PieAppTests\obj\Debug\net8.0\PieAppTests.sourcelink.json

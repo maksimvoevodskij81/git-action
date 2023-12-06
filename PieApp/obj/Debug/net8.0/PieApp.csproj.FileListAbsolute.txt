@@ -507,3 +507,4 @@ C:\Users\maksi\Repos\git-actions\PieApp\obj\Debug\net8.0\refint\PieApp.dll
 C:\Users\maksi\Repos\git-actions\PieApp\obj\Debug\net8.0\PieApp.pdb
 C:\Users\maksi\Repos\git-actions\PieApp\obj\Debug\net8.0\PieApp.genruntimeconfig.cache
 C:\Users\maksi\Repos\git-actions\PieApp\obj\Debug\net8.0\ref\PieApp.dll
+C:\Users\maksi\Repos\git-actions\PieApp\obj\Debug\net8.0\PieApp.sourcelink.json
