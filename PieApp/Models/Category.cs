@@ -6,5 +6,6 @@
         public string CategoryName { get; set; } = string.Empty;
         public string? CategoryDescription { get; set; }
         public List<Pie>? Pies { get; set; }
+        public string Test { get; set; }
     }
 }

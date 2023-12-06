@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PieApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd65bde6c20cb4be6f9034a6143dad8c2bdd3997")]
 [assembly: System.Reflection.AssemblyProductAttribute("PieApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PieApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

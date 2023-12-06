@@ -13,186 +13,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20221227164808_Inition'
-)
-BEGIN
-    CREATE TABLE [Categories] (
-        [CategoryId] int NOT NULL IDENTITY,
-        [CategoryName] nvarchar(max) NOT NULL,
-        [CategoryDescription] nvarchar(max) NULL,
-        CONSTRAINT [PK_Categories] PRIMARY KEY ([CategoryId])
-    );
-END;
-GO
-
-IF NOT EXISTS (
-    SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20221227164808_Inition'
-)
-BEGIN
-    CREATE TABLE [Pies] (
-        [PieId] int NOT NULL IDENTITY,
-        [Name] nvarchar(max) NOT NULL,
-        [ShortDescription] nvarchar(max) NULL,
-        [LongDescription] nvarchar(max) NULL,
-        [AllergyInformation] nvarchar(max) NULL,
-        [Price] decimal(18,2) NOT NULL,
-        [ImageUrl] nvarchar(max) NULL,
-        [ImageThumbnailUrl] nvarchar(max) NULL,
-        [IsPieOfTheWeek] bit NOT NULL,
-        [InStock] bit NOT NULL,
-        [CategoryId] int NOT NULL,
-        CONSTRAINT [PK_Pies] PRIMARY KEY ([PieId]),
-        CONSTRAINT [FK_Pies_Categories_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [Categories] ([CategoryId]) ON DELETE CASCADE
-    );
-END;
-GO
-
-IF NOT EXISTS (
-    SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20221227164808_Inition'
-)
-BEGIN
-    CREATE INDEX [IX_Pies_CategoryId] ON [Pies] ([CategoryId]);
-END;
-GO
-
-IF NOT EXISTS (
-    SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20221227164808_Inition'
-)
-BEGIN
-    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20221227164808_Inition', N'8.0.0');
-END;
-GO
-
-COMMIT;
-GO
-
-BEGIN TRANSACTION;
-GO
-
-IF NOT EXISTS (
-    SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20221228114948_ShoppingCart'
-)
-BEGIN
-    CREATE TABLE [ShoppingCartItems] (
-        [ShoppingCartItemId] int NOT NULL IDENTITY,
-        [PieId] int NOT NULL,
-        [Amount] int NOT NULL,
-        [ShoppingCartId] nvarchar(max) NULL,
-        CONSTRAINT [PK_ShoppingCartItems] PRIMARY KEY ([ShoppingCartItemId]),
-        CONSTRAINT [FK_ShoppingCartItems_Pies_PieId] FOREIGN KEY ([PieId]) REFERENCES [Pies] ([PieId]) ON DELETE CASCADE
-    );
-END;
-GO
-
-IF NOT EXISTS (
-    SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20221228114948_ShoppingCart'
-)
-BEGIN
-    CREATE INDEX [IX_ShoppingCartItems_PieId] ON [ShoppingCartItems] ([PieId]);
-END;
-GO
-
-IF NOT EXISTS (
-    SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20221228114948_ShoppingCart'
-)
-BEGIN
-    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20221228114948_ShoppingCart', N'8.0.0');
-END;
-GO
-
-COMMIT;
-GO
-
-BEGIN TRANSACTION;
-GO
-
-IF NOT EXISTS (
-    SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230115172627_Add_Order_And_OrderDetail'
-)
-BEGIN
-    CREATE TABLE [Orders] (
-        [OrderId] int NOT NULL IDENTITY,
-        [FirstName] nvarchar(50) NOT NULL,
-        [LastName] nvarchar(50) NOT NULL,
-        [AddressLine1] nvarchar(100) NOT NULL,
-        [AddressLine2] nvarchar(max) NULL,
-        [ZipCode] nvarchar(10) NOT NULL,
-        [City] nvarchar(50) NOT NULL,
-        [State] nvarchar(10) NULL,
-        [Country] nvarchar(50) NOT NULL,
-        [PhoneNumber] nvarchar(25) NOT NULL,
-        [Email] nvarchar(50) NOT NULL,
-        [OrderTotal] decimal(18,2) NOT NULL,
-        [OrderPlaced] datetime2 NOT NULL,
-        CONSTRAINT [PK_Orders] PRIMARY KEY ([OrderId])
-    );
-END;
-GO
-
-IF NOT EXISTS (
-    SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230115172627_Add_Order_And_OrderDetail'
-)
-BEGIN
-    CREATE TABLE [OrderDetails] (
-        [OrderDetailId] int NOT NULL IDENTITY,
-        [OrderId] int NOT NULL,
-        [PieId] int NOT NULL,
-        [Amount] int NOT NULL,
-        [Price] decimal(18,2) NOT NULL,
-        CONSTRAINT [PK_OrderDetails] PRIMARY KEY ([OrderDetailId]),
-        CONSTRAINT [FK_OrderDetails_Orders_OrderId] FOREIGN KEY ([OrderId]) REFERENCES [Orders] ([OrderId]) ON DELETE CASCADE,
-        CONSTRAINT [FK_OrderDetails_Pies_PieId] FOREIGN KEY ([PieId]) REFERENCES [Pies] ([PieId]) ON DELETE CASCADE
-    );
-END;
-GO
-
-IF NOT EXISTS (
-    SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230115172627_Add_Order_And_OrderDetail'
-)
-BEGIN
-    CREATE INDEX [IX_OrderDetails_OrderId] ON [OrderDetails] ([OrderId]);
-END;
-GO
-
-IF NOT EXISTS (
-    SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230115172627_Add_Order_And_OrderDetail'
-)
-BEGIN
-    CREATE INDEX [IX_OrderDetails_PieId] ON [OrderDetails] ([PieId]);
-END;
-GO
-
-IF NOT EXISTS (
-    SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230115172627_Add_Order_And_OrderDetail'
-)
-BEGIN
-    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20230115172627_Add_Order_And_OrderDetail', N'8.0.0');
-END;
-GO
-
-COMMIT;
-GO
-
-BEGIN TRANSACTION;
-GO
-
-IF NOT EXISTS (
-    SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230117141511_AddIdentity'
+    WHERE [MigrationId] = N'20231206155333_Init'
 )
 BEGIN
     CREATE TABLE [AspNetRoles] (
@@ -207,7 +28,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230117141511_AddIdentity'
+    WHERE [MigrationId] = N'20231206155333_Init'
 )
 BEGIN
     CREATE TABLE [AspNetUsers] (
@@ -233,7 +54,45 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230117141511_AddIdentity'
+    WHERE [MigrationId] = N'20231206155333_Init'
+)
+BEGIN
+    CREATE TABLE [Categories] (
+        [CategoryId] int NOT NULL IDENTITY,
+        [CategoryName] nvarchar(max) NOT NULL,
+        [CategoryDescription] nvarchar(max) NULL,
+        CONSTRAINT [PK_Categories] PRIMARY KEY ([CategoryId])
+    );
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20231206155333_Init'
+)
+BEGIN
+    CREATE TABLE [Orders] (
+        [OrderId] int NOT NULL IDENTITY,
+        [FirstName] nvarchar(50) NOT NULL,
+        [LastName] nvarchar(50) NOT NULL,
+        [AddressLine1] nvarchar(100) NOT NULL,
+        [AddressLine2] nvarchar(max) NULL,
+        [ZipCode] nvarchar(10) NOT NULL,
+        [City] nvarchar(50) NOT NULL,
+        [State] nvarchar(10) NULL,
+        [Country] nvarchar(50) NOT NULL,
+        [PhoneNumber] nvarchar(25) NOT NULL,
+        [Email] nvarchar(50) NOT NULL,
+        [OrderTotal] decimal(18,2) NOT NULL,
+        [OrderPlaced] datetime2 NOT NULL,
+        CONSTRAINT [PK_Orders] PRIMARY KEY ([OrderId])
+    );
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20231206155333_Init'
 )
 BEGIN
     CREATE TABLE [AspNetRoleClaims] (
@@ -249,7 +108,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230117141511_AddIdentity'
+    WHERE [MigrationId] = N'20231206155333_Init'
 )
 BEGIN
     CREATE TABLE [AspNetUserClaims] (
@@ -265,12 +124,12 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230117141511_AddIdentity'
+    WHERE [MigrationId] = N'20231206155333_Init'
 )
 BEGIN
     CREATE TABLE [AspNetUserLogins] (
-        [LoginProvider] nvarchar(450) NOT NULL,
-        [ProviderKey] nvarchar(450) NOT NULL,
+        [LoginProvider] nvarchar(128) NOT NULL,
+        [ProviderKey] nvarchar(128) NOT NULL,
         [ProviderDisplayName] nvarchar(max) NULL,
         [UserId] nvarchar(450) NOT NULL,
         CONSTRAINT [PK_AspNetUserLogins] PRIMARY KEY ([LoginProvider], [ProviderKey]),
@@ -281,7 +140,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230117141511_AddIdentity'
+    WHERE [MigrationId] = N'20231206155333_Init'
 )
 BEGIN
     CREATE TABLE [AspNetUserRoles] (
@@ -296,13 +155,13 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230117141511_AddIdentity'
+    WHERE [MigrationId] = N'20231206155333_Init'
 )
 BEGIN
     CREATE TABLE [AspNetUserTokens] (
         [UserId] nvarchar(450) NOT NULL,
-        [LoginProvider] nvarchar(450) NOT NULL,
-        [Name] nvarchar(450) NOT NULL,
+        [LoginProvider] nvarchar(128) NOT NULL,
+        [Name] nvarchar(128) NOT NULL,
         [Value] nvarchar(max) NULL,
         CONSTRAINT [PK_AspNetUserTokens] PRIMARY KEY ([UserId], [LoginProvider], [Name]),
         CONSTRAINT [FK_AspNetUserTokens_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
@@ -312,7 +171,64 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230117141511_AddIdentity'
+    WHERE [MigrationId] = N'20231206155333_Init'
+)
+BEGIN
+    CREATE TABLE [Pies] (
+        [PieId] int NOT NULL IDENTITY,
+        [Name] nvarchar(max) NOT NULL,
+        [ShortDescription] nvarchar(max) NULL,
+        [LongDescription] nvarchar(max) NULL,
+        [AllergyInformation] nvarchar(max) NULL,
+        [Price] decimal(18,2) NOT NULL,
+        [ImageUrl] nvarchar(max) NULL,
+        [ImageThumbnailUrl] nvarchar(max) NULL,
+        [IsPieOfTheWeek] bit NOT NULL,
+        [InStock] bit NOT NULL,
+        [CategoryId] int NOT NULL,
+        CONSTRAINT [PK_Pies] PRIMARY KEY ([PieId]),
+        CONSTRAINT [FK_Pies_Categories_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [Categories] ([CategoryId]) ON DELETE CASCADE
+    );
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20231206155333_Init'
+)
+BEGIN
+    CREATE TABLE [OrderDetails] (
+        [OrderDetailId] int NOT NULL IDENTITY,
+        [OrderId] int NOT NULL,
+        [PieId] int NOT NULL,
+        [Amount] int NOT NULL,
+        [Price] decimal(18,2) NOT NULL,
+        CONSTRAINT [PK_OrderDetails] PRIMARY KEY ([OrderDetailId]),
+        CONSTRAINT [FK_OrderDetails_Orders_OrderId] FOREIGN KEY ([OrderId]) REFERENCES [Orders] ([OrderId]) ON DELETE CASCADE,
+        CONSTRAINT [FK_OrderDetails_Pies_PieId] FOREIGN KEY ([PieId]) REFERENCES [Pies] ([PieId]) ON DELETE CASCADE
+    );
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20231206155333_Init'
+)
+BEGIN
+    CREATE TABLE [ShoppingCartItems] (
+        [ShoppingCartItemId] int NOT NULL IDENTITY,
+        [PieId] int NOT NULL,
+        [Amount] int NOT NULL,
+        [ShoppingCartId] nvarchar(max) NULL,
+        CONSTRAINT [PK_ShoppingCartItems] PRIMARY KEY ([ShoppingCartItemId]),
+        CONSTRAINT [FK_ShoppingCartItems_Pies_PieId] FOREIGN KEY ([PieId]) REFERENCES [Pies] ([PieId]) ON DELETE CASCADE
+    );
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20231206155333_Init'
 )
 BEGIN
     CREATE INDEX [IX_AspNetRoleClaims_RoleId] ON [AspNetRoleClaims] ([RoleId]);
@@ -321,7 +237,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230117141511_AddIdentity'
+    WHERE [MigrationId] = N'20231206155333_Init'
 )
 BEGIN
     EXEC(N'CREATE UNIQUE INDEX [RoleNameIndex] ON [AspNetRoles] ([NormalizedName]) WHERE [NormalizedName] IS NOT NULL');
@@ -330,7 +246,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230117141511_AddIdentity'
+    WHERE [MigrationId] = N'20231206155333_Init'
 )
 BEGIN
     CREATE INDEX [IX_AspNetUserClaims_UserId] ON [AspNetUserClaims] ([UserId]);
@@ -339,7 +255,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230117141511_AddIdentity'
+    WHERE [MigrationId] = N'20231206155333_Init'
 )
 BEGIN
     CREATE INDEX [IX_AspNetUserLogins_UserId] ON [AspNetUserLogins] ([UserId]);
@@ -348,7 +264,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230117141511_AddIdentity'
+    WHERE [MigrationId] = N'20231206155333_Init'
 )
 BEGIN
     CREATE INDEX [IX_AspNetUserRoles_RoleId] ON [AspNetUserRoles] ([RoleId]);
@@ -357,7 +273,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230117141511_AddIdentity'
+    WHERE [MigrationId] = N'20231206155333_Init'
 )
 BEGIN
     CREATE INDEX [EmailIndex] ON [AspNetUsers] ([NormalizedEmail]);
@@ -366,7 +282,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230117141511_AddIdentity'
+    WHERE [MigrationId] = N'20231206155333_Init'
 )
 BEGIN
     EXEC(N'CREATE UNIQUE INDEX [UserNameIndex] ON [AspNetUsers] ([NormalizedUserName]) WHERE [NormalizedUserName] IS NOT NULL');
@@ -375,11 +291,47 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20230117141511_AddIdentity'
+    WHERE [MigrationId] = N'20231206155333_Init'
+)
+BEGIN
+    CREATE INDEX [IX_OrderDetails_OrderId] ON [OrderDetails] ([OrderId]);
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20231206155333_Init'
+)
+BEGIN
+    CREATE INDEX [IX_OrderDetails_PieId] ON [OrderDetails] ([PieId]);
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20231206155333_Init'
+)
+BEGIN
+    CREATE INDEX [IX_Pies_CategoryId] ON [Pies] ([CategoryId]);
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20231206155333_Init'
+)
+BEGIN
+    CREATE INDEX [IX_ShoppingCartItems_PieId] ON [ShoppingCartItems] ([PieId]);
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20231206155333_Init'
 )
 BEGIN
     INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20230117141511_AddIdentity', N'8.0.0');
+    VALUES (N'20231206155333_Init', N'8.0.0');
 END;
 GO
 
