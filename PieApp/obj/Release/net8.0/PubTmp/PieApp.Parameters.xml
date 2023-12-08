@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="IIS Web Application Name" description="" value="pieapp" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\maksi\\Repos\\git-actions\\PieApp\\obj\\Release\\net8\.0\\PubTmp\\Out\\$" />
-  </parameter>
-  <parameter name="PieApp.PieAppDbContext" description="" value="Data Source=pieapp-server.database.windows.net,1433;Initial Catalog=pieapp-db;User ID=maksym-admin;Password=marvel-2016" tags="dbfullsql">
-    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\maksi\\Repos\\git-actions\\PieApp\\obj\\Release\\net8\.0\\PubTmp\\EFSQLScripts\\PieApp\.PieAppDbContext\.sql$" />
-  </parameter>
-</parameters>
