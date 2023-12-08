@@ -37,8 +37,8 @@ builder.Services.AddDbContext<PieAppDbContext>(options =>
 builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddEntityFrameworkStores<PieAppDbContext>();
 
-builder.Services.AddDataProtection()
-    .PersistKeysToFileSystem(new DirectoryInfo("/app/keys"));
+//builder.Services.AddDataProtection()
+//    .PersistKeysToFileSystem(new DirectoryInfo("/app/keys"));
 
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
@@ -65,5 +65,14 @@ app.MapDefaultControllerRoute();
 app.MapRazorPages();
 app.MapBlazorHub();
 app.MapFallbackToPage("/app/{*catchall}", "/App/Index");
-DbInitializer.Seed(app);
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+   // var context = services.GetRequiredService<PieAppDbContext>();
+   // context.Database.EnsureCreated();
+
+    // Call static method to create lookup values and sample data
+    DbInitializer.Seed(services);
+}
 app.Run();

@@ -239,10 +239,6 @@ namespace PieApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Test")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");

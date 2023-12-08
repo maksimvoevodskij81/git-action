@@ -12,8 +12,8 @@ using PieApp;
 namespace PieApp.Migrations
 {
     [DbContext(typeof(PieAppDbContext))]
-    [Migration("20231206202303_Test")]
-    partial class Test
+    [Migration("20231208164103_Inition")]
+    partial class Inition
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -239,10 +239,6 @@ namespace PieApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Test")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
