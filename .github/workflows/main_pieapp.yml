@@ -62,7 +62,7 @@ jobs:
         with:
           app-name: 'pieapp'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_87118BB7FE554134B1283785490FA802 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6697AEDA0D0F42B8B8202A5F84FBF3E9 }}
           package: .
 
       - name: Azure SQL Deploy
