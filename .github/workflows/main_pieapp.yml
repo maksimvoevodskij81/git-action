@@ -14,62 +14,44 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '8.x'
-
-      - name: Restore Dependencies
-        run: dotnet restore
+          dotnet-version: '3.1'
+          include-prerelease: true
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
-      - name: Publish dotnet app
+      - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-
-      - name: Install EntityFramworkCore Tools  
-        run: |
-          dotnet new tool-manifest
-          dotnet tool install dotnet-ef
-
-      - name: Generate EF Core Migration Script       
-        run: |
-          dotnet ef migrations script --idempotent --no-build --configuration Release --output ${{env.DOTNET_ROOT}}/sql/sql-script.sql --context PieAppDbContext --project ${{github.workspace}}/PieApp/PieApp.csproj
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: ddl-updates
-          path: ${{env.DOTNET_ROOT}}/sql/sql-script.sql
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'Prodaction'
+      name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: ddl-updates
-
+          name: .net-app
+      
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'pieapp'
-          slot-name: 'develop'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6697AEDA0D0F42B8B8202A5F84FBF3E9 }}
+          slot-name: 'Production'
           package: .
-
-      - name: Azure SQL Deploy
-        uses: Azure/sql-action@v2
-        with:
-          connection-string: ${{secrets.SQL_CONNECTION_STRING}}
-          path: ./sql-script.sql
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AAF167800F30427E8D67E153CBF18F02 }}
